@@ -40,6 +40,32 @@ def format_alert(paper: Paper, topics: list[str], novelty: NoveltyResult, final_
     return "\n".join(lines)
 
 
+def format_alert_plain(paper: Paper, topics: list[str], novelty: NoveltyResult, final_score: float) -> str:
+    """Plain-text version for channels without HTML support (e.g. WhatsApp)."""
+    code_line = "Available" if novelty.code_available else "Not reported"
+    emoji = NOVELTY_EMOJI.get(novelty.novelty, "❓")
+
+    lines = [
+        "\U0001f6a8 NEW RESEARCH ALERT",
+        "",
+        paper.title,
+        f"Category: {', '.join(topics) or 'Uncategorized'}",
+        f"Published: {paper.published.date().isoformat()}",
+        f"Score: {final_score}/10",
+        "",
+        f"What's new? {novelty.new_contribution}",
+        f"Why care: {novelty.why_interesting}",
+        "",
+        f"{emoji} Novelty: {novelty.novelty}",
+        f"Code: {code_line}",
+        f"Paper: {paper.url}",
+    ]
+    if novelty.error:
+        lines += ["", f"Note: {novelty.error}"]
+
+    return "\n".join(lines)
+
+
 def format_no_new_papers() -> str:
     return "Research Radar ran — no new papers cleared the alert threshold this time."
 
