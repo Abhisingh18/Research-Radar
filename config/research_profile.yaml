@@ -1,0 +1,92 @@
+# Research Radar profile — edit this without touching any code.
+#
+# `keywords` under each topic are used for cheap, local pre-filtering of
+# arXiv results before anything is sent to an LLM (cost control).
+# `priority` controls how much a topic contributes to the final ranking
+# score (0.0 - 1.0).
+
+topics:
+  ASR:
+    priority: 1.0
+    keywords:
+      - "automatic speech recognition"
+      - "speech recognition"
+      - "speech encoder"
+      - "ASR"
+  TTS:
+    priority: 0.9
+    keywords:
+      - "text-to-speech"
+      - "text to speech"
+      - "speech synthesis"
+      - "neural codec"
+      - "TTS"
+  Speech LLM:
+    priority: 1.0
+    keywords:
+      - "speech language model"
+      - "audio language model"
+      - "speech LLM"
+      - "voice agent"
+  VLM:
+    priority: 0.95
+    keywords:
+      - "vision-language model"
+      - "vision language model"
+      - "VLM"
+      - "multimodal"
+  AI Agents:
+    priority: 1.0
+    keywords:
+      - "AI agent"
+      - "agentic"
+      - "LLM agent"
+      - "tool calling"
+      - "tool use"
+      - "computer use"
+      - "self-improving agent"
+      - "multi-agent"
+  LLM:
+    priority: 0.85
+    keywords:
+      - "large language model"
+      - "LLM"
+      - "mixture of experts"
+      - "MoE"
+      - "KV cache"
+      - "long context"
+      - "reasoning model"
+  RAG:
+    priority: 0.75
+    keywords:
+      - "retrieval augmented generation"
+      - "retrieval-augmented generation"
+      - "RAG"
+  MCP:
+    priority: 0.9
+    keywords:
+      - "model context protocol"
+      - "MCP"
+  Robotics/Embodied:
+    priority: 0.8
+    keywords:
+      - "embodied AI"
+      - "robot learning"
+      - "robotic manipulation"
+      - "VLA"
+
+# Papers whose title/abstract match any of these are dropped even if a
+# topic keyword also matched. Keep this short — it's a coarse filter.
+exclude_if_matches:
+  - "survey"
+  - "a systematic review"
+  - "benchmark suite"
+
+# Minimum combined score (0-10) required to send a Telegram alert.
+notify_threshold: 6.5
+
+# Max candidates sent to the LLM per run (cost control).
+max_llm_candidates: 15
+
+# Max alerts sent per run, highest score first.
+max_alerts_per_run: 5
