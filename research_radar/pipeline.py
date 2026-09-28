@@ -1,7 +1,7 @@
 """Orchestrates a single Research Radar run:
 
 arXiv fetch -> classify -> dedup -> LLM novelty analysis -> score ->
-threshold -> Telegram alert -> persist state + dashboard data.
+threshold -> Telegram/WhatsApp alert -> persist state + dashboard data.
 """
 
 from __future__ import annotations
@@ -11,7 +11,7 @@ import logging
 from dataclasses import asdict
 from pathlib import Path
 
-from research_radar import classify, digest, scoring, storage, telegram
+from research_radar import classify, digest, scoring, storage, telegram, whatsapp
 from research_radar.config import ResearchProfile, load_profile
 from research_radar.novelty import NoveltyResult, analyze
 from research_radar.sources.arxiv import ArxivSource
@@ -99,13 +99,21 @@ def _notify(alerts: list[tuple[Paper, list[str], NoveltyResult, float]], dry_run
         return
 
     for paper, topics, novelty, final_score in alerts:
-        message = digest.format_alert(paper, topics, novelty, final_score)
-        if dry_run or not telegram.is_configured():
-            print(message)
+        html_message = digest.format_alert(paper, topics, novelty, final_score)
+        plain_message = digest.format_alert_plain(paper, topics, novelty, final_score)
+
+        any_channel_configured = telegram.is_configured() or whatsapp.is_configured()
+        if dry_run or not any_channel_configured:
+            print(plain_message)
             print("-" * 60)
-        else:
-            sent = telegram.send(message)
+            continue
+
+        if telegram.is_configured():
+            sent = telegram.send(html_message)
             logger.info("telegram alert for %s: %s", paper.id, "sent" if sent else "failed")
+        if whatsapp.is_configured():
+            sent = whatsapp.send(plain_message)
+            logger.info("whatsapp alert for %s: %s", paper.id, "sent" if sent else "failed")
 
 
 def _persist(
