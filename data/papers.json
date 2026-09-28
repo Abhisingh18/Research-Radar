@@ -1,0 +1,113 @@
+[
+  {
+    "id": "http://arxiv.org/abs/2609.31590v1",
+    "title": "AgentWorld: Benchmarking Long-Horizon Collaboration of Multi-agent LLMs",
+    "url": "http://arxiv.org/abs/2609.31590v1",
+    "published": "2026-09-25T17:44:03+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Evaluating long-horizon, multi-agent collaboration in LLM-based agents",
+      "new_contribution": "Introduction of AgentWorld, a benchmark with 100 human-annotated tasks and 100 augmented variants for evaluating long-horizon collaboration in a MMORPG sandbox",
+      "architecture_innovation": "Causal Collaboration Effectiveness (CCE), a graph-based metric to measure the effectiveness of collaboration",
+      "results": "Best model (DeepSeek R1-70B) achieves 52.0% task success, with common failure modes including communication breakdowns, role confusion, and inability to maintain shared plans",
+      "code_available": true,
+      "novelty": "HIGH",
+      "why_interesting": "AgentWorld addresses a significant gap in evaluating multi-agent collaboration, particularly in long-horizon tasks, and introduces a novel metric to quantify collaboration effectiveness.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2609.31568v1",
+    "title": "DeepEdu-v1: Efficient and Scalable Agentic LLMs for Vietnamese Education",
+    "url": "http://arxiv.org/abs/2609.31568v1",
+    "published": "2026-09-25T17:33:41+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Improving AI tutoring for Vietnamese education while addressing data sovereignty and local content accuracy issues.",
+      "new_contribution": "Introduction of DeepEdu-v1, an AI-tutoring system that addresses the limitations of cloud assistants and self-hosted models in Vietnamese education.",
+      "architecture_innovation": "Two key innovations: a long-context inference engine that reduces retrieval calls and prefill latency, and a self-improving agentic layer that curates a verified playbook from past interactions.",
+      "results": "Achieves nearly x2 TTFT speedup over standard vLLM serving and lifts agentic accuracy from 70.0% to 79.5% on complex tasks, with significant gains in financial-reasoning and interactive-agent benchmarks.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "DeepEdu-v1 addresses critical issues in AI tutoring for developing regions, offering a scalable and culturally relevant solution that enhances both performance and accuracy.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2609.31524v1",
+    "title": "Structured Reasoning Agentic Framework for Interpretable Critical View of Safety Assessment",
+    "url": "http://arxiv.org/abs/2609.31524v1",
+    "published": "2026-09-25T17:01:56+00:00",
+    "topics": [
+      "VLM",
+      "AI Agents",
+      "LLM"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Laparoscopic cholecystectomy is challenging due to the complex anatomy of the hepatocystic triangle and the risk of bile duct injury. Existing methods for Critical View of Safety (CVS) assessment lack interpretability and compositional generalization.",
+      "new_contribution": "Proposes ReasonCVS, a structured reasoning agentic framework that decomposes CVS assessment into explicit, fine-grained anatomical verification using Vision-Language Models (VLMs) and a Rationale-Aware Reasoning Agent.",
+      "architecture_innovation": "Introduces an Anatomical Scene Graph Abstraction (ASGA) and a Rationale-Aware Reasoning Agent, which uses a Large Language Model (LLM) fine-tuned via rationale distillation to evaluate individual sub-criteria and synthesize a final verdict with a traceable clinical rationale.",
+      "results": "Achieves superior performance (68.1% mAP) on the Endoscapes-CVS201 benchmark compared to state-of-the-art methods, while providing interpretable, criterion-level explanations.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "The framework combines VLMs and LLMs in a novel way to enhance interpretability and reliability in surgical scene understanding, which is crucial for improving patient safety.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2609.31551v1",
+    "title": "EAServe: Encode-Aware Disaggregated Serving for Multimodal Large Language Models",
+    "url": "http://arxiv.org/abs/2609.31551v1",
+    "published": "2026-09-25T17:20:22+00:00",
+    "topics": [
+      "VLM",
+      "LLM"
+    ],
+    "score": 9.35,
+    "novelty": {
+      "problem": "Resource allocation and utilization challenges in serving multimodal large language models (MLLMs) with a three-stage Encode-Prefill-Decode (EPD) pipeline.",
+      "new_contribution": "EAServe, a system that optimizes the EPD pipeline by managing load-adaptive micro-batching, rate-controlled partial offload, and dynamic GPU partitioning.",
+      "architecture_innovation": "Repositions the Encode stage as the control point of the EPD pipeline, integrating it with Prefill and Decode stages to improve resource utilization and performance.",
+      "results": "EAServe delivers up to 4.3x and 1.7x higher goodput than NVIDIA Dynamo and vLLM, respectively, under identical SLO constraints, and achieves more balanced and higher GPU utilization.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "EAServe addresses a critical bottleneck in serving MLLMs by optimizing the EPD pipeline, leading to significant performance improvements and better resource utilization.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2609.31507v1",
+    "title": "SatNav: A Scalable Benchmark for Long-Horizon UAV Vision-Language Navigation from Satellite Imagery",
+    "url": "http://arxiv.org/abs/2609.31507v1",
+    "published": "2026-09-25T16:48:44+00:00",
+    "topics": [
+      "VLM",
+      "RAG"
+    ],
+    "score": 9.35,
+    "novelty": {
+      "problem": "Scaling existing benchmarks for urban UAV vision-language navigation (VLN) is limited by the reliance on costly 3D assets, reducing geographic diversity and episode scale.",
+      "new_contribution": "Introduction of SatNav, a scalable long-horizon UAV VLN benchmark using high-resolution satellite imagery, with 118K episodes from 59 scenes across 18 cities.",
+      "architecture_innovation": "SwiftVLN, a modular framework with switchable memory components for systematic memory-design ablations.",
+      "results": "Benchmarking shows that city-scale navigation remains challenging for both classical VLN agents and recent LVLMs. Satellite-trained models can transfer to real-flight UAV observations.",
+      "code_available": true,
+      "novelty": "HIGH",
+      "why_interesting": "SatNav addresses the scalability issue in UAV VLN benchmarks and introduces a practical framework for long-horizon navigation tasks. The ability to transfer satellite-trained models to real UAVs is particularly noteworthy.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  }
+]
