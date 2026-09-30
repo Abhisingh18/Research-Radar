@@ -40,6 +40,16 @@ def build_parser() -> argparse.ArgumentParser:
     search_parser.add_argument("--all", action="store_true", help="Include already-seen papers")
     search_parser.add_argument("--state-file", type=Path, default=storage.DEFAULT_STATE_FILE)
 
+    backfill_parser = subparsers.add_parser(
+        "backfill",
+        help="One-time historical pull (e.g. since 2022) to seed the dashboard's Archive view. "
+        "Never sends Telegram/WhatsApp alerts.",
+    )
+    backfill_parser.add_argument("--since", default="2022-01-01", help="YYYY-MM-DD (default: 2022-01-01)")
+    backfill_parser.add_argument("--until", default=None, help="YYYY-MM-DD (default: today)")
+    backfill_parser.add_argument("--max-fetch", type=int, default=100, help="Max papers to fetch from arXiv")
+    backfill_parser.add_argument("--config", type=Path, default=None, help="Path to research_profile.yaml")
+
     return parser
 
 
@@ -61,6 +71,14 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "search":
         return _search(args)
+
+    if args.command == "backfill":
+        profile = load_profile(args.config) if args.config else load_profile()
+        results = pipeline.backfill(
+            profile=profile, since=args.since, until=args.until, max_fetch=args.max_fetch
+        )
+        print(f"Backfill complete: {len(results)} historical paper(s) added to data/papers.json")
+        return 0
 
     return 1
 
