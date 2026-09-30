@@ -34,12 +34,29 @@ class ArxivSource:
         query = " OR ".join(f'all:"{kw.strip()}"' for kw in keywords if kw.strip())
         return self._query(query, max_results)
 
-    def _query(self, search_query: str, max_results: int) -> list[Paper]:
+    def fetch_by_keywords_since(
+        self, keywords: list[str], since: str, until: str | None = None, max_results: int = 100
+    ) -> list[Paper]:
+        """Historical search: `since`/`until` are "YYYY-MM-DD" (until defaults to today).
+
+        Sorted by relevance rather than date, since a single page of results
+        spanning years should surface the strongest matches, not just
+        whatever was submitted closest to `until`.
+        """
+        if not keywords:
+            raise ValueError("at least one keyword is required")
+        until_str = (until or datetime.now(timezone.utc).strftime("%Y-%m-%d")).replace("-", "") + "2359"
+        since_str = since.replace("-", "") + "0000"
+        keyword_query = " OR ".join(f'all:"{kw.strip()}"' for kw in keywords if kw.strip())
+        query = f"({keyword_query}) AND submittedDate:[{since_str} TO {until_str}]"
+        return self._query(query, max_results, sort_by="relevance")
+
+    def _query(self, search_query: str, max_results: int, sort_by: str = "submittedDate") -> list[Paper]:
         params = {
             "search_query": search_query,
             "start": 0,
             "max_results": max_results,
-            "sortBy": "submittedDate",
+            "sortBy": sort_by,
             "sortOrder": "descending",
         }
         url = f"{ARXIV_API_URL}?{urlencode(params)}"
