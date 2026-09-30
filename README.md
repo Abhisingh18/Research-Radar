@@ -40,7 +40,7 @@ Required for the full pipeline (`python -m research_radar run`):
 | `OPENROUTER_API_KEY` | LLM novelty analysis — get one at https://openrouter.ai/keys |
 | `OPENROUTER_MODEL` | Any model slug from https://openrouter.ai/models (Qwen, GLM, Nvidia Nemotron, etc.) |
 | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | Telegram alerts (optional) |
-| `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_WHATSAPP_FROM`, `TWILIO_WHATSAPP_TO` | WhatsApp alerts via Twilio (optional) |
+| `CALLMEBOT_PHONE`, `CALLMEBOT_APIKEY` | WhatsApp alerts via [CallMeBot](https://www.callmebot.com/blog/free-api-whatsapp-messages/) (optional, free, personal-use) |
 
 Without any notification channel configured, `run` just prints alerts to
 stdout — handy for testing before wiring up Telegram/WhatsApp.
@@ -83,7 +83,7 @@ Actions) for the scheduled run to work:
 
 - `OPENROUTER_API_KEY`
 - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (if using Telegram)
-- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_WHATSAPP_FROM`, `TWILIO_WHATSAPP_TO` (if using WhatsApp)
+- `CALLMEBOT_PHONE`, `CALLMEBOT_APIKEY` (if using WhatsApp)
 
 You can also trigger a run manually from the Actions tab (`workflow_dispatch`).
 
