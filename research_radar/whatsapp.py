@@ -1,18 +1,21 @@
-"""Sends messages via Twilio's WhatsApp API.
+"""Sends WhatsApp messages via CallMeBot (https://www.callmebot.com/blog/free-api-whatsapp-messages/).
 
-Requires a Twilio account with WhatsApp enabled (the free sandbox works for
-personal use — see https://www.twilio.com/docs/whatsapp/sandbox).
+CallMeBot is a free, unofficial personal-use WhatsApp API - no business
+account, no billing, no template approval. Good fit for a handful of
+personal alerts a day; not meant for high-volume or commercial use.
+
+Setup (one-time, from your own phone):
+  1. Save +34 644 71 71 92 as a contact.
+  2. WhatsApp it: "I allow callmebot to send me messages"
+  3. It replies with your API key.
 
 Set:
-  TWILIO_ACCOUNT_SID
-  TWILIO_AUTH_TOKEN
-  TWILIO_WHATSAPP_FROM   e.g. "whatsapp:+14155238886" (Twilio sandbox number)
-  TWILIO_WHATSAPP_TO     e.g. "whatsapp:+91XXXXXXXXXX" (your number, with country code)
+  CALLMEBOT_PHONE   your number with country code, digits only, e.g. "919648531091"
+  CALLMEBOT_APIKEY  the key CallMeBot sent you
 
-Keep the phone number out of source control — set it as a local env var or a
-GitHub Actions secret, never commit it.
+Keep both out of source control - local env var or GitHub Actions secret only.
 
-If any var is missing, `send` is a no-op that returns False, same as the
+If either var is missing, `send` is a no-op that returns False, same as the
 Telegram module, so the pipeline degrades gracefully.
 """
 
@@ -22,30 +25,23 @@ import os
 
 import requests
 
-TWILIO_URL = "https://api.twilio.com/2010-04-01/Accounts/{sid}/Messages.json"
+CALLMEBOT_URL = "https://api.callmebot.com/whatsapp.php"
 
 
 def is_configured() -> bool:
-    return all(
-        os.environ.get(var)
-        for var in ("TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN", "TWILIO_WHATSAPP_FROM", "TWILIO_WHATSAPP_TO")
-    )
+    return bool(os.environ.get("CALLMEBOT_PHONE")) and bool(os.environ.get("CALLMEBOT_APIKEY"))
 
 
 def send(text: str, timeout: float = 15.0) -> bool:
-    sid = os.environ.get("TWILIO_ACCOUNT_SID")
-    token = os.environ.get("TWILIO_AUTH_TOKEN")
-    from_number = os.environ.get("TWILIO_WHATSAPP_FROM")
-    to_number = os.environ.get("TWILIO_WHATSAPP_TO")
-    if not all((sid, token, from_number, to_number)):
+    phone = os.environ.get("CALLMEBOT_PHONE")
+    apikey = os.environ.get("CALLMEBOT_APIKEY")
+    if not phone or not apikey:
         return False
 
-    url = TWILIO_URL.format(sid=sid)
-    response = requests.post(
-        url,
-        auth=(sid, token),
-        data={"From": from_number, "To": to_number, "Body": text},
+    response = requests.get(
+        CALLMEBOT_URL,
+        params={"phone": phone, "text": text, "apikey": apikey},
         timeout=timeout,
     )
     response.raise_for_status()
-    return True
+    return "queued" in response.text.lower()
