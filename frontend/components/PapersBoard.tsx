@@ -7,6 +7,8 @@ import { PaperCard } from "@/components/PaperCard";
 const RECENT_WINDOW_DAYS = 90;
 const ARCHIVE_START_YEAR = 2022;
 
+type View = "recent" | "archive";
+
 export function PapersBoard({ papers }: { papers: PaperAlert[] }) {
   const topics = useMemo(() => {
     const counts = new Map<string, number>();
@@ -19,8 +21,9 @@ export function PapersBoard({ papers }: { papers: PaperAlert[] }) {
   }, [papers]);
 
   const [selected, setSelected] = useState<string | null>(null);
+  const [view, setView] = useState<View>("recent");
 
-  const visible = selected ? papers.filter((p) => p.topics.includes(selected)) : papers;
+  const filtered = selected ? papers.filter((p) => p.topics.includes(selected)) : papers;
 
   const { recent, archive } = useMemo(() => {
     const cutoff = new Date();
@@ -29,7 +32,7 @@ export function PapersBoard({ papers }: { papers: PaperAlert[] }) {
 
     const recent: PaperAlert[] = [];
     const archive: PaperAlert[] = [];
-    for (const paper of visible) {
+    for (const paper of filtered) {
       const published = new Date(paper.published);
       if (published >= cutoff) {
         recent.push(paper);
@@ -38,10 +41,29 @@ export function PapersBoard({ papers }: { papers: PaperAlert[] }) {
       }
     }
     return { recent, archive };
-  }, [visible]);
+  }, [filtered]);
+
+  const activePapers = view === "recent" ? recent : archive;
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-6">
+      <div className="flex gap-2 border-b border-black/10 dark:border-white/10 pb-4">
+        <ViewTab
+          label="Recent"
+          subtitle={`last ${RECENT_WINDOW_DAYS} days`}
+          count={recent.length}
+          active={view === "recent"}
+          onClick={() => setView("recent")}
+        />
+        <ViewTab
+          label="Archive"
+          subtitle={`${ARCHIVE_START_YEAR} onwards`}
+          count={archive.length}
+          active={view === "archive"}
+          onClick={() => setView("archive")}
+        />
+      </div>
+
       <div className="flex flex-wrap gap-2">
         <TopicChip
           label="All"
@@ -60,53 +82,48 @@ export function PapersBoard({ papers }: { papers: PaperAlert[] }) {
         ))}
       </div>
 
-      <Section
-        title="Latest"
-        subtitle={`Last ${RECENT_WINDOW_DAYS} days`}
-        papers={recent}
-        emptyMessage="No recent papers in this category yet."
-      />
-
-      <Section
-        title="Archive"
-        subtitle={`${ARCHIVE_START_YEAR} onwards`}
-        papers={archive}
-        emptyMessage="No older papers in this category yet."
-      />
-    </div>
-  );
-}
-
-function Section({
-  title,
-  subtitle,
-  papers,
-  emptyMessage,
-}: {
-  title: string;
-  subtitle: string;
-  papers: PaperAlert[];
-  emptyMessage: string;
-}) {
-  return (
-    <section className="flex flex-col gap-4">
-      <div className="flex items-baseline gap-2">
-        <h2 className="text-lg font-semibold">{title}</h2>
-        <span className="text-sm text-neutral-400 dark:text-neutral-500">
-          {subtitle} · {papers.length}
-        </span>
-      </div>
-
-      {papers.length === 0 ? (
-        <p className="text-sm text-neutral-500 dark:text-neutral-400">{emptyMessage}</p>
+      {activePapers.length === 0 ? (
+        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          {view === "recent" ? "No recent papers in this category yet." : "No older papers in this category yet."}
+        </p>
       ) : (
         <div className="flex flex-col gap-4">
-          {papers.map((paper) => (
+          {activePapers.map((paper) => (
             <PaperCard key={paper.id} paper={paper} />
           ))}
         </div>
       )}
-    </section>
+    </div>
+  );
+}
+
+function ViewTab({
+  label,
+  subtitle,
+  count,
+  active,
+  onClick,
+}: {
+  label: string;
+  subtitle: string;
+  count: number;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-lg px-4 py-2 text-left transition-colors ${
+        active
+          ? "bg-foreground text-background"
+          : "bg-black/5 dark:bg-white/10 text-neutral-600 dark:text-neutral-300 hover:bg-black/10 dark:hover:bg-white/15"
+      }`}
+    >
+      <div className="text-sm font-semibold">
+        {label} <span className="opacity-60 font-normal">{count}</span>
+      </div>
+      <div className="text-xs opacity-70">{subtitle}</div>
+    </button>
   );
 }
 
