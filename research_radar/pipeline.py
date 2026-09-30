@@ -55,6 +55,39 @@ def run(
     return [_alert_to_dict(*a) for a in alerts]
 
 
+def backfill(
+    profile: ResearchProfile | None = None,
+    since: str = "2022-01-01",
+    until: str | None = None,
+    max_fetch: int = 100,
+    state_file: Path = DEFAULT_STATE_FILE,
+    papers_file: Path = DEFAULT_PAPERS_FILE,
+) -> list[dict]:
+    """One-time historical pull (e.g. "everything relevant since 2022") to
+    seed the dashboard's Archive view. Unlike `run`, this never sends
+    Telegram/WhatsApp alerts (old papers aren't "new research") and persists
+    every analyzed candidate, not just ones above the notify threshold.
+    """
+    profile = profile or load_profile()
+    seen = storage.load_seen(state_file)
+
+    source = ArxivSource()
+    fetched = source.fetch_by_keywords_since(
+        profile.all_keywords(), since=since, until=until, max_results=max_fetch
+    )
+    logger.info("arxiv backfill: fetched %d papers since %s", len(fetched), since)
+
+    candidates = _select_candidates(fetched, seen, profile)
+    logger.info("filtered to %d new backfill candidates for LLM analysis", len(candidates))
+
+    analyzed = _analyze_candidates(candidates, profile)
+    analyzed.sort(key=lambda a: a[3], reverse=True)
+
+    _persist(fetched, analyzed, seen, state_file, papers_file)
+
+    return [_alert_to_dict(*a) for a in analyzed]
+
+
 def _select_candidates(
     papers: list[Paper], seen: set[str], profile: ResearchProfile
 ) -> list[tuple[Paper, list[str]]]:
