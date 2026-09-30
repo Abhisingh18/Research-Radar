@@ -1,5 +1,5 @@
 import { getPapers } from "@/lib/papers";
-import { PaperCard } from "@/components/PaperCard";
+import { PapersBoard } from "@/components/PapersBoard";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
       <main className="mx-auto w-full max-w-4xl px-6 py-12">
-        <header className="mb-10">
+        <header className="mb-8">
           <h1 className="text-2xl font-semibold tracking-tight">Research Radar</h1>
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
             ASR · TTS · Speech LLMs · VLMs · Multimodal · AI Agents — genuinely new papers only.
@@ -25,11 +25,7 @@ export default async function Home() {
             from the repo root to populate data/papers.json.
           </p>
         ) : (
-          <div className="flex flex-col gap-4">
-            {papers.map((paper) => (
-              <PaperCard key={paper.id} paper={paper} />
-            ))}
-          </div>
+          <PapersBoard papers={papers} />
         )}
       </main>
     </div>
