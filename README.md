@@ -5,7 +5,7 @@ agents. It scans arXiv, filters to your interests, runs each candidate paper
 through an LLM for a novelty/relevance read, ranks the results, and alerts you
 on Telegram and/or WhatsApp — plus a Next.js dashboard to browse everything.
 
-Designed to run on a schedule via **GitHub Actions**, so it keeps working even
+Designed to run on a schedule via **GitHub Action**, so it keeps working even
 when your laptop is off.
 
 ## Pipeline
