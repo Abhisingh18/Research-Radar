@@ -1,5 +1,352 @@
 [
   {
+    "id": "http://arxiv.org/abs/2510.22344v1",
+    "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+    "url": "http://arxiv.org/abs/2510.22344v1",
+    "published": "2025-10-25T15:59:33+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Existing RAG frameworks struggle with complex, multi-hop queries and often fail to comprehensively gather and synthesize information from disparate sources.",
+      "new_contribution": "Introduction of FAIR-RAG, a novel framework that uses an Iterative Refinement Cycle and Structured Evidence Assessment (SEA) to systematically identify and fill evidence gaps.",
+      "architecture_innovation": "The SEA module deconstructs the initial query into a checklist of required findings, audits the aggregated evidence, and identifies informational gaps, which are then used to generate targeted sub-queries.",
+      "results": "FAIR-RAG significantly outperforms strong baselines on challenging multi-hop QA benchmarks, achieving an F1-score of 0.453 on HotpotQA, an absolute improvement of 8.3 points over the strongest iterative baseline.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "FAIR-RAG introduces a structured and evidence-driven approach to RAG, which is crucial for handling complex, multi-hop queries and ensuring comprehensive and accurate information synthesis.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2412.16500v3",
+    "title": "Speech Retrieval-Augmented Generation without Automatic Speech Recognition",
+    "url": "http://arxiv.org/abs/2412.16500v3",
+    "published": "2024-12-21T06:16:04+00:00",
+    "topics": [
+      "ASR",
+      "Speech LLM",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "ASR errors propagating to retrieval and generation steps in question answering over speech data.",
+      "new_contribution": "Introduction of SpeechRAG, a framework for open-question answering over spoken data that bypasses ASR by directly retrieving audio passages from text-based queries.",
+      "architecture_innovation": "Fine-tuning a pre-trained speech encoder into a speech adapter fed into a frozen LLM-based retrieval model, aligning the embedding spaces of text and speech.",
+      "results": "Retrieval experiments show that direct speech retrieval does not degrade over the text-based baseline and outperforms cascaded systems using ASR. For generation, the approach outperforms cascaded text-based models when there is high WER in the transcripts.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "SpeechRAG addresses a significant limitation in cascaded ASR-based systems by directly handling speech, which can lead to more accurate and robust question answering over spoken data.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2504.12330v1",
+    "title": "HM-RAG: Hierarchical Multi-Agent Multimodal Retrieval Augmented Generation",
+    "url": "http://arxiv.org/abs/2504.12330v1",
+    "published": "2025-04-13T06:55:33+00:00",
+    "topics": [
+      "VLM",
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Complex queries in RAG systems require coordinated reasoning across heterogeneous data ecosystems, which single-agent RAG systems struggle to handle.",
+      "new_contribution": "HM-RAG, a hierarchical multi-agent multimodal RAG framework that enhances query understanding and accuracy by integrating textual, graph-relational, and web-derived evidence.",
+      "architecture_innovation": "Three-tiered architecture with specialized agents: Decomposition Agent, Multi-source Retrieval Agents, and Decision Agent, enabling modular and coordinated reasoning.",
+      "results": "12.95% improvement in answer accuracy and 3.56% boost in question classification accuracy over baseline RAG systems on ScienceQA and CrisisMMD benchmarks. State-of-the-art results in zero-shot settings on both datasets.",
+      "code_available": true,
+      "novelty": "HIGH",
+      "why_interesting": "HM-RAG addresses the limitations of single-agent RAG systems by introducing a modular and hierarchical architecture, significantly improving performance on complex queries and establishing new benchmarks in zero-shot settings.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2507.05724v3",
+    "title": "Omni-Router: Sharing Routing Decisions in Sparse Mixture-of-Experts for Speech Recognition",
+    "url": "http://arxiv.org/abs/2507.05724v3",
+    "published": "2025-07-08T07:18:33+00:00",
+    "topics": [
+      "ASR",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Improving the efficiency and performance of Mixture-of-Experts (MoE) architectures in automatic speech recognition (ASR).",
+      "new_contribution": "Introduction of the Omni-router Transformer, which uses a shared router across different MoE layers to increase cooperation and specialization among experts.",
+      "architecture_innovation": "Shared router mechanism across multiple MoE layers to enhance inter-layer correlation and expert specialization.",
+      "results": "Achieved lower training loss and consistently outperformed dense and Switch Transformer models, reducing average word error rates by 11.2% and 8.2%, respectively, across 10 diverse ASR benchmarks.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "The Omni-router Transformer introduces a novel approach to sharing routing decisions, which could lead to more efficient and robust ASR models. The significant reduction in word error rates across diverse benchmarks is particularly noteworthy.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2605.28175v2",
+    "title": "Mixture-of-Experts Knowledge Graph Retrieval-Augmented Generation for Multi-Agent LLM-based Recommendation",
+    "url": "http://arxiv.org/abs/2605.28175v2",
+    "published": "2026-05-27T08:56:57+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "LLM-based recommender systems suffer from outdated knowledge and ineffective knowledge graph retrieval-augmented generation (KG-RAG) due to one-size-fits-all retrieval strategies and structural information loss.",
+      "new_contribution": "Proposes MixRAGRec, a cooperative multi-agent framework that addresses the challenges of query complexity and retrieval granularity in KG-RAG for recommendations.",
+      "architecture_innovation": "Integrates a Mixture-of-Experts Retrieval Agent, a Knowledge Preference Alignment Agent, and a Contrastive Learning-reinforced Recommendation Agent, trained with Mixture-of-Experts Multi-Agent Policy Optimization (MMAPO).",
+      "results": "Extensive experiments on real-world datasets demonstrate the effectiveness of the framework.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "MixRAGRec addresses key challenges in KG-RAG for recommendations, such as query complexity and retrieval granularity, using a novel multi-agent framework. This could significantly improve the performance and relevance of LLM-based recommender systems.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2505.22571v3",
+    "title": "Agent-UniRAG: A Trainable Open-Source LLM Agent Framework for Unified Retrieval-Augmented Generation Systems",
+    "url": "http://arxiv.org/abs/2505.22571v3",
+    "published": "2025-05-28T16:46:31+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Unified retrieval-augmented generation (RAG) systems for complex reasoning tasks, including both single-hop and multi-hop queries.",
+      "new_contribution": "A trainable agent framework called Agent-UniRAG that unifies single-hop and multi-hop RAG tasks in an end-to-end manner.",
+      "architecture_innovation": "Designs an LLM agent framework to solve RAG tasks step-by-step, enhancing interpretability and effectiveness.",
+      "results": "Comparable performances with closed-source and larger open-source LLMs across various RAG benchmarks.",
+      "code_available": true,
+      "novelty": "HIGH",
+      "why_interesting": "Agent-UniRAG addresses the gap in unified RAG systems, making it more applicable to real-world scenarios. The availability of the code and synthetic dataset further enhances its practical value.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2508.04721v1",
+    "title": "Toward Low-Latency End-to-End Voice Agents for Telecommunications Using Streaming ASR, Quantized LLMs, and Real-Time TTS",
+    "url": "http://arxiv.org/abs/2508.04721v1",
+    "published": "2025-08-05T07:39:35+00:00",
+    "topics": [
+      "ASR",
+      "TTS",
+      "Speech LLM",
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 9.4,
+    "novelty": {
+      "problem": "Developing a low-latency, domain-specific AI voice agent pipeline for real-time telecommunications applications such as call center automation and customer support.",
+      "new_contribution": "A specialized pipeline integrating streaming ASR, a 4-bit quantized LLM, a domain-specific embedding model, and real-time TTS, all tailored for the telecom domain.",
+      "architecture_innovation": "The use of 4-bit quantization for the LLM (TSLAM) to reduce latency, and the integration of domain-specific models (T-VEC, TTE, T-Synth) to enhance relevance and performance in telecom applications.",
+      "results": "The system achieves real-time factors (RTF) below 1.0 for TSLAM, TTE, and T-Synth, demonstrating low latency suitable for enterprise telecom deployments. Evaluated on a dataset of 500 human-recorded telecom questions, the system shows strong performance in latency, domain relevance, and real-time capabilities.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "The combination of domain-specific models and 4-bit quantization for low-latency performance is a significant advancement for real-time telecom applications. The system's ability to handle complex telecom queries with high relevance and low latency makes it highly relevant for industry use.",
+      "relevance_score": 9.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2501.00332v1",
+    "title": "MAIN-RAG: Multi-Agent Filtering Retrieval-Augmented Generation",
+    "url": "http://arxiv.org/abs/2501.00332v1",
+    "published": "2024-12-31T08:07:26+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 8.8,
+    "novelty": {
+      "problem": "LLMs often generate outdated or incorrect information, and existing RAG systems struggle with the quality of retrieved documents, leading to performance degradation and increased computational overhead.",
+      "new_contribution": "Introduction of MAIN-RAG, a training-free RAG framework that uses multiple LLM agents to collaboratively filter and score retrieved documents, improving the quality and relevance of the information used.",
+      "architecture_innovation": "Adaptive filtering mechanism that dynamically adjusts the relevance filtering threshold based on score distributions, and inter-agent consensus for robust document selection.",
+      "results": "MAIN-RAG outperforms traditional RAG approaches on four QA benchmarks, achieving a 2-11% improvement in answer accuracy and reducing the number of irrelevant retrieved documents.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "MAIN-RAG addresses a critical issue in RAG systems by improving the quality of retrieved documents without additional training, making it a practical and effective solution for enhancing LLM performance.",
+      "relevance_score": 8.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2604.18509v2",
+    "title": "MASS-RAG: Multi-Agent Synthesis Retrieval-Augmented Generation",
+    "url": "http://arxiv.org/abs/2604.18509v2",
+    "published": "2026-04-20T17:00:38+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 8.8,
+    "novelty": {
+      "problem": "Improving retrieval-augmented generation (RAG) in the presence of noisy, incomplete, or heterogeneous retrieved contexts.",
+      "new_contribution": "Introduction of MASS-RAG, a multi-agent synthesis approach that uses role-specialized agents for evidence summarization, extraction, and reasoning.",
+      "architecture_innovation": "A multi-agent architecture with distinct roles for processing retrieved information and a synthesis stage to combine their outputs.",
+      "results": "Experiments on four benchmarks show consistent improvements over strong RAG baselines, especially in scenarios with distributed relevant evidence.",
+      "code_available": false,
+      "novelty": "HIGH",
+      "why_interesting": "MASS-RAG addresses a significant challenge in RAG by leveraging a multi-agent system, which could enhance the robustness and accuracy of information retrieval and generation tasks.",
+      "relevance_score": 8.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2412.05838v1",
+    "title": "A Collaborative Multi-Agent Approach to Retrieval-Augmented Generation Across Diverse Data",
+    "url": "http://arxiv.org/abs/2412.05838v1",
+    "published": "2024-12-08T07:18:19+00:00",
+    "topics": [
+      "AI Agents",
+      "LLM",
+      "RAG"
+    ],
+    "score": 7.6,
+    "novelty": {
+      "problem": "Traditional RAG systems are inefficient and less accurate when dealing with diverse data sources such as relational databases, document stores, and graph databases.",
+      "new_contribution": "A multi-agent RAG system where specialized agents handle query generation for different data sources, improving efficiency and accuracy.",
+      "architecture_innovation": "Modular framework with specialized agents for relational, NoSQL, and document-based systems, collaborating within a distributed environment.",
+      "results": "Not reported",
+      "code_available": false,
+      "novelty": "MEDIUM",
+      "why_interesting": "The multi-agent approach addresses the limitations of single-agent RAG systems, making it more suitable for complex, heterogeneous data environments. This could significantly enhance the performance and scalability of generative AI applications.",
+      "relevance_score": 8.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2501.10734v1",
+    "title": "GEC-RAG: Improving Generative Error Correction via Retrieval-Augmented Generation for Automatic Speech Recognition Systems",
+    "url": "http://arxiv.org/abs/2501.10734v1",
+    "published": "2025-01-18T11:53:22+00:00",
+    "topics": [
+      "ASR",
+      "LLM",
+      "RAG"
+    ],
+    "score": 7.6,
+    "novelty": {
+      "problem": "High Word Error Rates (WER) in ASR systems for low-resource languages and specific domains.",
+      "new_contribution": "A Retrieval-Augmented Generation (RAG) approach called GEC-RAG to improve ASR accuracy in low-resource domains like Persian.",
+      "architecture_innovation": "Uses a knowledge base of ASR predictions and ground truths, retrieves lexically similar examples using TF-IDF, and feeds these to a Generative LLM for targeted corrections.",
+      "results": "Significantly reduces WER in Persian, demonstrating potential for domain adaptation and low-resource scenarios.",
+      "code_available": false,
+      "novelty": "MEDIUM",
+      "why_interesting": "The approach leverages existing ASR systems without requiring direct modification, making it adaptable to various domains by updating the knowledge base.",
+      "relevance_score": 8.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2606.10853v1",
+    "title": "Speech Encoder Fusion for LLM-based Automatic Speech Recognition",
+    "url": "http://arxiv.org/abs/2606.10853v1",
+    "published": "2026-06-09T13:32:13+00:00",
+    "topics": [
+      "ASR",
+      "LLM"
+    ],
+    "score": 7.6,
+    "novelty": {
+      "problem": "Improving ASR performance by leveraging multiple pre-trained speech encoders in LLM-based systems.",
+      "new_contribution": "Investigation of fusion strategies for combining multiple pre-trained speech encoders to enhance speech-aware LLMs for ASR.",
+      "architecture_innovation": "Explores learned combinations and Transformer-based fusion architectures beyond simple feature concatenation.",
+      "results": "Fusing multiple speech encoders improves ASR performance in mono- and multilingual settings as well as diarized speech recognition with minimal computational overhead.",
+      "code_available": false,
+      "novelty": "MEDIUM",
+      "why_interesting": "The paper addresses the practical challenge of leveraging multiple encoders to improve ASR, which could lead to more robust and versatile speech recognition systems.",
+      "relevance_score": 8.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2409.08597v1",
+    "title": "LA-RAG:Enhancing LLM-based ASR Accuracy with Retrieval-Augmented Generation",
+    "url": "http://arxiv.org/abs/2409.08597v1",
+    "published": "2024-09-13T07:28:47+00:00",
+    "topics": [
+      "ASR",
+      "LLM",
+      "RAG"
+    ],
+    "score": 7.6,
+    "novelty": {
+      "problem": "Improving ASR accuracy in LLMs, particularly under varied acoustic conditions and accents.",
+      "new_contribution": "Introduction of LA-RAG, a Retrieval-Augmented Generation paradigm that leverages fine-grained token-level speech datastores and a speech-to-speech retrieval mechanism.",
+      "architecture_innovation": "Combines LLM in-context learning (ICL) with a retrieval mechanism to enhance ASR accuracy.",
+      "results": "Significant improvements in ASR accuracy on Mandarin and various Chinese dialect datasets, especially in handling accent variations.",
+      "code_available": false,
+      "novelty": "MEDIUM",
+      "why_interesting": "LA-RAG addresses a critical issue in ASR by improving accuracy in challenging acoustic conditions, which is particularly relevant for multilingual and dialectal speech recognition.",
+      "relevance_score": 8.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2510.25518v1",
+    "title": "Retrieval Augmented Generation (RAG) for Fintech: Agentic Design and Evaluation",
+    "url": "http://arxiv.org/abs/2510.25518v1",
+    "published": "2025-10-29T13:41:36+00:00",
+    "topics": [
+      "AI Agents",
+      "RAG"
+    ],
+    "score": 7.0,
+    "novelty": {
+      "problem": "Specialized domains like fintech pose challenges for RAG systems due to domain-specific ontologies, dense terminology, and acronyms.",
+      "new_contribution": "An agentic RAG architecture with a modular pipeline of specialized agents for query reformulation, sub-query decomposition, acronym resolution, and context re-ranking.",
+      "architecture_innovation": "Modular pipeline of specialized agents including intelligent query reformulation, iterative sub-query decomposition, contextual acronym resolution, and cross-encoder-based context re-ranking.",
+      "results": "The agentic RAG system outperforms the baseline in retrieval precision and relevance, but with increased latency.",
+      "code_available": false,
+      "novelty": "MEDIUM",
+      "why_interesting": "The modular approach with specialized agents addresses specific challenges in fintech, demonstrating improved performance in retrieval precision and relevance.",
+      "relevance_score": 7.0,
+      "error": null
+    }
+  },
+  {
+    "id": "http://arxiv.org/abs/2407.21476v1",
+    "title": "On the Problem of Text-To-Speech Model Selection for Synthetic Data Generation in Automatic Speech Recognition",
+    "url": "http://arxiv.org/abs/2407.21476v1",
+    "published": "2024-07-31T09:37:27+00:00",
+    "topics": [
+      "ASR",
+      "TTS"
+    ],
+    "score": 7.0,
+    "novelty": {
+      "problem": "Selecting the most effective TTS models for generating synthetic data to train ASR systems.",
+      "new_contribution": "Comparison of five TTS decoder architectures for synthetic data generation and their impact on CTC-based ASR training.",
+      "architecture_innovation": "Not reported",
+      "results": "Auto-regressive decoding outperforms non-autoregressive decoding for synthetic data generation. No clear relationship found between computable metrics (NISQA MOS, intelligibility) and ASR performance.",
+      "code_available": false,
+      "novelty": "MEDIUM",
+      "why_interesting": "The study provides insights into the selection of TTS models for synthetic data generation, which is crucial for improving ASR systems. It highlights the importance of auto-regressive decoding and the lack of clear correlations between common metrics and ASR performance.",
+      "relevance_score": 7.0,
+      "error": null
+    }
+  },
+  {
     "id": "http://arxiv.org/abs/2609.31590v1",
     "title": "AgentWorld: Benchmarking Long-Horizon Collaboration of Multi-agent LLMs",
     "url": "http://arxiv.org/abs/2609.31590v1",
