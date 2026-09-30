@@ -7,13 +7,19 @@ export default async function Home() {
   const papers = await getPapers();
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <main className="mx-auto w-full max-w-4xl px-6 py-12">
-        <header className="mb-8">
-          <h1 className="text-2xl font-semibold tracking-tight">Research Radar</h1>
-          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-            ASR · TTS · Speech LLMs · VLMs · Multimodal · AI Agents — genuinely new papers only.
-          </p>
+    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-black dark:to-neutral-950">
+      <main className="mx-auto w-full max-w-5xl px-6 py-14">
+        <header className="mb-10 flex items-center gap-3">
+          <span className="relative flex h-3 w-3 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-60" />
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-orange-500" />
+          </span>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Research Radar</h1>
+            <p className="mt-0.5 text-sm text-neutral-500 dark:text-neutral-400">
+              ASR · TTS · Speech LLMs · VLMs · Multimodal · AI Agents — genuinely new papers only.
+            </p>
+          </div>
         </header>
 
         {papers.length === 0 ? (
