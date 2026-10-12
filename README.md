@@ -6,7 +6,7 @@ through an LLM for a novelty/relevance read, ranks the results, and alerts you
 on Telegram and/or WhatsApp — plus a Next.js dashboard to browse everything.
 
 Designed to run on a schedule via **GitHub Action**, so it keeps working even
-when your laptop is off.
+when your laptop is off ,.
 
 ## Pipeline
 
